@@ -6,7 +6,7 @@ env:
         ECR_DOCKER_ENDPOINT: dkr.ecr.ap-northeast-1.amazonaws.com
         ECR_REPOSITORY_NAME: ak-notebook-prod-backend-ecr
         DOCKER_BUILDKIT: "1"
-        PRODUCRTION: production
+        PRODUCTION: production
     
 phases:
     install:
