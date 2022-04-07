@@ -33,9 +33,9 @@ phases:
     post_build:
         commands:
             # trivyによるイメージスキャン(結果格納用)
-            - trivy --format json --output trivy_results.json --exit-code 0 --no-progress ${REPOSITORY_URI}:${IMAGE_TAG}
+            - trivy image --format json --output trivy_results.json --exit-code 0 --no-progress ${REPOSITORY_URI}:${IMAGE_TAG}
             # trivyによるイメージスキャン(CRITICALレベルの脆弱性ある場合はBuild強制終了)
-            - trivy --exit-code 1 --severity CRITICAL --no-progress ${REPOSITORY_URI}:${IMAGE_TAG}
+            - trivy image --exit-code 1 --severity CRITICAL --no-progress ${REPOSITORY_URI}:${IMAGE_TAG}
             - exit `echo $?`
             # dockleによるイメージチェック(FATALレベルの脆弱性ある場合はBuild強制終了)
             - dockle --format json -o dockle_results.json --exit-code 1 --exit-level "FATAL" ${REPOSITORY_URI}:${IMAGE_TAG}
