@@ -94,7 +94,7 @@
       "EC2",
       "FARGATE"
     ],
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:551756349985:task-definition/ak-notebook-prod-backend-def:15",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:551756349985:task-definition/ak-notebook-prod-backend-def:17",
     "family": "ak-notebook-prod-backend-def",
     "requiresAttributes": [
       {
@@ -168,7 +168,7 @@
       "cpuArchitecture": null
     },
     "cpu": "512",
-    "revision": 15,
+    "revision": 17,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
     "proxyConfiguration": null,
