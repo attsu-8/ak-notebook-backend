@@ -1,32 +1,9 @@
 from pathlib import Path
+from datetime import timedelta
 import os
-from datetime import date, timedelta
-from .local_settings import SECRET_KEY, DB_NAME, DB_USER, DB_PASS, DB_PORT, DB_HOST
+from config.settings.os_env import DB_NAME, DB_USER, DB_PASS, DB_PORT, DB_HOST
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-_hnsk0$6f(+tq=61*j8+p8x5@mn&*(r6ufc&q*)-r6^w16s6&&"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# ALLOWED_HOSTS = [
-#     "localhost",
-#     'http://ak-notebook-prod-alb-ingress-1702372154.ap-northeast-1.elb.amazonaws.com'
-#     ]
-
-ALLOWED_HOSTS = [
-    '*'
-    ]
-
-
-# Application definition
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,7 +12,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'djoser',
     'api.apps.ApiConfig',
@@ -52,10 +28,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CORS_ORIGIN_WHITELIST = [
-    'https://ak-notebook.com'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -104,9 +76,6 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7)
 }
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -120,10 +89,6 @@ DATABASES = {
         }
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -139,10 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'ja'
 
