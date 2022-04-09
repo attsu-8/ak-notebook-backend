@@ -33,6 +33,14 @@
           {
             "name": "DB_DESTINATION_PORT",
             "value": "3306"
+          },
+          {
+            "name": "DJANGO_SETTINGS_MODULE",
+            "value": "config.settings.production"
+          },
+          {
+            "name": "SECRET_KEY",
+            "value": "django-insecure-hrexa0k$1&1s+$mdbzjn_q)!)p^3c6=3o+3wz_(a@8dkj#r1q+"
           }
         ],
         "resourceRequirements": null,
@@ -86,7 +94,7 @@
       "EC2",
       "FARGATE"
     ],
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:551756349985:task-definition/ak-notebook-prod-backend-def:6",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:551756349985:task-definition/ak-notebook-prod-backend-def:13",
     "family": "ak-notebook-prod-backend-def",
     "requiresAttributes": [
       {
@@ -157,7 +165,7 @@
     "networkMode": "awsvpc",
     "runtimePlatform": null,
     "cpu": "512",
-    "revision": 6,
+    "revision": 13,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
     "proxyConfiguration": null,
