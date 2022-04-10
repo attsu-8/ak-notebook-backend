@@ -435,10 +435,8 @@ class DmBrowsingMemoCount(AkNotebookCommonModel):
 class DmLearningEfficiency(AkNotebookCommonModel):
     aggregate_date = models.DateField(
         verbose_name='集計日付',
-        # default=date.today(), 
-        # editable=False
     )
-    learning_efficiency_rate = models.IntegerField(
+    learning_efficiency_rate = models.FloatField(
         verbose_name='学習効率',
         )
     note = models.ForeignKey(
@@ -484,7 +482,15 @@ class DmLearningEfficiency(AkNotebookCommonModel):
         verbose_name = '学習効率'
         verbose_name_plural = '学習効率データマート'
         constraints = [
-            models.UniqueConstraint(fields=['aggregate_date', 'note', 'parent_memo_category', 'memo'], name='AggregateDate_Memo_Unique')
+            models.UniqueConstraint(fields=[
+                'aggregate_date', 
+                'note', 
+                'parent_memo_category', 
+                'child_memo_category',
+                'purpose', 
+                'memo',
+                'user'
+            ], name='AggregateDate_Memo_Unique')
         ]
     def __str__(self):
         return str(self.memo) + str(self.aggregate_date) + str(self.learning_efficiency_rate)
