@@ -10,5 +10,6 @@ ALLOWED_HOSTS = [
     ]
 
 CORS_ORIGIN_WHITELIST = [
-    'https://ak-notebook.com'
+    'https://ak-notebook.com',
+    'https://ak-notebook.com:10443',
 ]
