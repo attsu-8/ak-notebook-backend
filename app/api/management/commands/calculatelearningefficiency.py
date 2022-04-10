@@ -6,6 +6,7 @@ import datetime
 
 now = datetime.datetime.now()
 today = datetime.datetime.now().date()
+print("バッチ処理開始日時：{}".format(str(now)))
 
 
 #DmLearningEfficiencyにデータを追加する際、外部キーはモデルインスタンスである必要があるため、全モデルデータを取得
@@ -75,7 +76,9 @@ class Command(BaseCommand):
                 'memo',
                 'user').annotate(max_datetime=Max('updated_at'))
 
-        max_browsing_datetime_all_date = DmLearningEfficiency.objects.aggregate(max_datetime_all=Max("updated_at")).get('max_datetime_all').date()
+        max_browsing_datetime_all_datetime = DmLearningEfficiency.objects.aggregate(max_datetime_all=Max("updated_at")).get('max_datetime_all')
+        max_browsing_datetime_all_date = max_browsing_datetime_all_datetime.date()
+        print('DmLearningEfficiencyの最大更新日時：{}'.format(str(max_browsing_datetime_all_datetime)))
 
         learning_efficiencies = []
         if max_browsing_datetime_all_date == today:
