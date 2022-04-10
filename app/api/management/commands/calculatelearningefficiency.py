@@ -4,9 +4,8 @@ import math
 from django.db.models import Max
 import datetime
 
-
-now = datetime.datetime.now(datetime.timezone.utc)
-today = datetime.datetime.now(datetime.timezone.utc).date()
+now = datetime.datetime.now()
+today = datetime.datetime.now().date()
 
 
 #DmLearningEfficiencyにデータを追加する際、外部キーはモデルインスタンスである必要があるため、全モデルデータを取得
