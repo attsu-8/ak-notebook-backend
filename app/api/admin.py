@@ -41,4 +41,5 @@ admin.site.register(models.StickyNote)
 admin.site.register(models.BrowsingMemoCount)
 admin.site.register(models.DmBrowsingMemoCount)
 admin.site.register(models.DmLearningEfficiency)
+admin.site.register(models.DmLearningEfficiencyBatchLog)
 
