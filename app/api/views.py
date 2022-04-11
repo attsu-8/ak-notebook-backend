@@ -348,6 +348,7 @@ class EachMemoLearningEfficiencyListView(generics.ListAPIView):
                     )
                 .extra(select={'elapsed_date_count': "DATEDIFF(CURRENT_TIMESTAMP,t_memos.created_at)"})
                 .values(
+                    'id',
                     'aggregate_date',
                     'note_id',
                     'parent_memo_category_id',

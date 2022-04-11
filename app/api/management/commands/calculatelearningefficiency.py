@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from api.models import BrowsingMemoCount, DmLearningEfficiency, Note, MemoCategory, Purpose, Memo, User
+from api.models import BrowsingMemoCount, DmLearningEfficiency, Note, MemoCategory, Purpose, Memo, User, DmLearningEfficiencyBatchLog
 import math
 from django.db.models import Max
 import datetime
@@ -28,33 +28,26 @@ def calculate_learning_efficiency(latest_browsing_datetime):
 
 def create_learning_efficiency_record(latest_browsing_memo):
     return DmLearningEfficiency(
+        id="{}{}".format(today, latest_browsing_memo["memo"]),
         aggregate_date=today,
         learning_efficiency_rate=calculate_learning_efficiency(latest_browsing_memo["max_datetime"]),
         note=notes.get(pk=latest_browsing_memo["memo__note"]),
         parent_memo_category=parent_memo_categories.get(pk=latest_browsing_memo["memo__parent_memo_category"]),
         child_memo_category=child_memo_categories.get(pk=latest_browsing_memo["memo__child_memo_category"]),
-        purpose=purposes.get(pk=latest_browsing_memo["memo__purpose"]),
+        # purpose=purposes.get(pk=latest_browsing_memo["memo__purpose"]),
         memo=memos.get(pk=latest_browsing_memo["memo"]),
         user=users.get(pk=latest_browsing_memo["user"])
     )
 
 
-def update_learning_efficiency_record(latest_browsing_memo, max_browsing_datetime_all_date):
+def update_learning_efficiency_record(latest_browsing_memo):
     return DmLearningEfficiency(
-        pk=DmLearningEfficiency.objects.get(
-            aggregate_date=max_browsing_datetime_all_date,
-            memo__note_id=latest_browsing_memo["memo__note"],
-            memo__parent_memo_category_id=latest_browsing_memo["memo__parent_memo_category"],
-            memo__child_memo_category_id=latest_browsing_memo["memo__child_memo_category"],
-            memo__purpose_id=latest_browsing_memo["memo__purpose"],
-            memo__memo_id=latest_browsing_memo["memo"], 
-            user__user_id=latest_browsing_memo["user"]
-            ).id,
+        pk="{}{}".format(today, latest_browsing_memo["memo"]),
         learning_efficiency_rate=calculate_learning_efficiency(latest_browsing_memo["max_datetime"]),
         note=notes.get(pk=latest_browsing_memo["memo__note"]),
         parent_memo_category=parent_memo_categories.get(pk=latest_browsing_memo["memo__parent_memo_category"]),
         child_memo_category=child_memo_categories.get(pk=latest_browsing_memo["memo__child_memo_category"]),
-        purpose=purposes.get(pk=latest_browsing_memo["memo__purpose"]),
+        # purpose=purposes.get(pk=latest_browsing_memo["memo__purpose"]),
         memo=memos.get(pk=latest_browsing_memo["memo"]),
         user=users.get(pk=latest_browsing_memo["user"])
     )
@@ -67,7 +60,7 @@ class Command(BaseCommand):
             memo__note__is_active=True,
             memo__parent_memo_category__is_active=True,
             memo__child_memo_category__is_active=True,
-            memo__purpose__is_active=True,
+            # memo__purpose__is_active=True,
             ).values(
                 'memo__note',
                 'memo__parent_memo_category',
@@ -76,15 +69,15 @@ class Command(BaseCommand):
                 'memo',
                 'user').annotate(max_datetime=Max('updated_at'))
 
-        max_browsing_datetime_all_datetime = DmLearningEfficiency.objects.aggregate(max_datetime_all=Max("updated_at")).get('max_datetime_all')
-        max_browsing_datetime_all_date = max_browsing_datetime_all_datetime.date()
-        print('DmLearningEfficiencyの最大更新日時：{}'.format(str(max_browsing_datetime_all_datetime)))
+        is_aggregated_today = DmLearningEfficiencyBatchLog.objects.filter(aggregate_date=today).values('is_aggregated_today')
 
         learning_efficiencies = []
-        if max_browsing_datetime_all_date == today:
+        if is_aggregated_today:
             print('update処理を開始')
+
             for latest_browsing_memo in latest_browsing_memos:
-                learning_efficiencies.append(update_learning_efficiency_record(latest_browsing_memo, max_browsing_datetime_all_date))
+                learning_efficiencies.append(update_learning_efficiency_record(latest_browsing_memo))
+            
             DmLearningEfficiency.objects.bulk_update(learning_efficiencies, [
                 'learning_efficiency_rate',
                 'note',
@@ -94,10 +87,22 @@ class Command(BaseCommand):
                 'memo',
                 'user'
             ])
+
             print('update処理を終了')
+
         else:
             print('insert処理を開始')
+
+            print('insert処理前に発生したレコードの削除')
+            dm_learning_efficiency_today = DmLearningEfficiency.objects.filter(aggregate_date=today)
+            dm_learning_efficiency_today.delete()
+
             for latest_browsing_memo in latest_browsing_memos:
                 learning_efficiencies.append(create_learning_efficiency_record(latest_browsing_memo))
+
             DmLearningEfficiency.objects.bulk_create(learning_efficiencies)
+            
+            DmLearningEfficiencyBatchLog.objects.create(aggregate_date=today)
+            
             print('insert処理を終了')
+

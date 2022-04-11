@@ -250,6 +250,7 @@ class DmBrowsingMemoCountSerializer(serializers.ModelSerializer):
             'user': {'read_only': True}
         }
 
+
 class DmLearningEfficiencySerializer(serializers.ModelSerializer):
 
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S",read_only=True)
@@ -258,6 +259,7 @@ class DmLearningEfficiencySerializer(serializers.ModelSerializer):
     class Meta:
         model = DmLearningEfficiency
         fields = (
+            'id',
             'aggregate_date',
             'learning_efficiency_rate',
             'note',
@@ -272,7 +274,6 @@ class DmLearningEfficiencySerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'user': {'read_only': True}
         }
-
 
 
 
@@ -316,7 +317,7 @@ class EachParentMemoCategoryLearningEfficiencySerializer(serializers.Serializer)
 
 
 class EachMemoLearningEfficiencySerializer(serializers.Serializer):
-
+    id=serializers.CharField()
     aggregate_date = serializers.DateField()
     note_id = serializers.UUIDField()
     parent_memo_category_id = serializers.UUIDField()

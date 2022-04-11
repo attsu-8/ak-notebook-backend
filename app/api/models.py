@@ -433,6 +433,11 @@ class DmBrowsingMemoCount(AkNotebookCommonModel):
 
 
 class DmLearningEfficiency(AkNotebookCommonModel):
+    id = models.CharField(
+        verbose_name='ID',
+        max_length=46,
+        primary_key=True
+    )
     aggregate_date = models.DateField(
         verbose_name='集計日付',
     )
@@ -481,16 +486,24 @@ class DmLearningEfficiency(AkNotebookCommonModel):
         db_table = 'dm_learning_efficiency'
         verbose_name = '学習効率'
         verbose_name_plural = '学習効率データマート'
-        constraints = [
-            models.UniqueConstraint(fields=[
-                'aggregate_date', 
-                'note', 
-                'parent_memo_category', 
-                'child_memo_category',
-                'purpose', 
-                'memo',
-                'user'
-            ], name='AggregateDate_Memo_Unique')
-        ]
     def __str__(self):
         return str(self.memo) + str(self.aggregate_date) + str(self.learning_efficiency_rate)
+
+
+class DmLearningEfficiencyBatchLog(AkNotebookCommonModel):
+    aggregate_date = models.DateField(
+        verbose_name='集計日付',
+        unique=True
+    )
+    is_aggregated_today = models.BooleanField(
+    verbose_name='当日集計実行済フラグ',
+    help_text='Trueの場合は当日分の新規集計処理終了',
+    default=True
+    )
+
+    class Meta:
+        db_table = 't_learning_efficiency_batch_log'
+        verbose_name = '学習効率集計バッチログ'
+        verbose_name_plural = '学習効率集計バッチログ'
+    def __str__(self):
+        return str(self.aggregate_date)
