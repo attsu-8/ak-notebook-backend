@@ -1,3 +1,3 @@
 app/media/*
 
-app/api/migrations/*
+app/api/migrations/00*
