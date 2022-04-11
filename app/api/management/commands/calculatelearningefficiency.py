@@ -77,6 +77,8 @@ class Command(BaseCommand):
 
             for latest_browsing_memo in latest_browsing_memos:
                 learning_efficiencies.append(update_learning_efficiency_record(latest_browsing_memo))
+            print("以下のインスタンス更新")
+            print(learning_efficiencies)
             
             DmLearningEfficiency.objects.bulk_update(learning_efficiencies, [
                 'learning_efficiency_rate',
@@ -95,10 +97,14 @@ class Command(BaseCommand):
 
             print('insert処理前に発生したレコードの削除')
             dm_learning_efficiency_today = DmLearningEfficiency.objects.filter(aggregate_date=today)
+            print("以下のインスタンスを削除")
+            print(dm_learning_efficiency_today)
             dm_learning_efficiency_today.delete()
 
             for latest_browsing_memo in latest_browsing_memos:
                 learning_efficiencies.append(create_learning_efficiency_record(latest_browsing_memo))
+            print("以下のインスタンス作成")
+            print(learning_efficiencies)
 
             DmLearningEfficiency.objects.bulk_create(learning_efficiencies)
             
