@@ -11,9 +11,7 @@ ALLOWED_HOSTS = [
 
 CORS_ORIGIN_WHITELIST = [
     'https://ak-notebook.com',
-    'https://ak-notebook.com/',
-    'https://ak-notebook.com:10443',
-    'https://ak-notebook.com:10443/',
+    'https://ak-notebook.com:10443'
 ]
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
