@@ -4,25 +4,15 @@ from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 import uuid
 from core.models import AkNotebookCommonModel
-from datetime import date
+from datetime import datetime
+
 
 def upload_avatar_path(instance, filename):
+    now = datetime.now()
     ext = filename.split('.')[-1]
     return '/'.join([
         'avatars', 
-        str(instance.user.user_id) + str(instance.profile_nickname) + str('.') + str(ext)
-        ])
-
-def upload_memo_path(instance, filename):
-    ext = filename.split('.')[-1]
-    return '/'.join([
-        'memos',
-        str(instance.user.user_id),
-        str(instance.note.note_id),
-        str(instance.parent_memo_category.memo_category_id),
-        str(instance.child_memo_category.memo_category_id),
-        str(instance.purpose.purpose_id),
-        str(instance.memo_id) + str('.') + str(ext)
+        str(instance.user.user_id) + str(instance.profile_nickname) + str(now) +  str('.') + str(ext)
         ])
 
 
