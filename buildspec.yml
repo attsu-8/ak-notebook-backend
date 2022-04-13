@@ -7,6 +7,9 @@ env:
         ECR_REPOSITORY_NAME: ak-notebook-prod-backend-ecr
         DOCKER_BUILDKIT: "1"
         PRODUCTION: production
+    secrets-manager:
+        DOCKERHUB_USER: arn:aws:secretsmanager:ap-northeast-1:551756349985:secret:ak-notebook-prod-docker-hub-account-9dp76d:username
+        DOCKERHUB_PASS: arn:aws:secretsmanager:ap-northeast-1:551756349985:secret:ak-notebook-prod-docker-hub-account-9dp76d:password
     
 phases:
     install:
@@ -15,7 +18,8 @@ phases:
     pre_build:
         commands:
             - AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' --output text)
-            - aws ecr --region ap-northeast-1 get-login-password | docker login --username AWS --password-stdin https://${AWS_ACCOUNT_ID}.${ECR_DOCKER_ENDPOINT}
+            - aws ecr --region ap-northeast-1 get-login-password
+            - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
             - REPOSITORY_URI=${AWS_ACCOUNT_ID}.${ECR_DOCKER_ENDPOINT}/${ECR_REPOSITORY_NAME}
             # タグ名にGitのコミットハッシュを利用
             - IMAGE_TAG=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | cut -c 1-7)
