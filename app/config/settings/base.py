@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'corsheaders',
     'django_filters',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
