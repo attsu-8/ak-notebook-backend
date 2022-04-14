@@ -326,5 +326,6 @@ class EachMemoLearningEfficiencySerializer(serializers.Serializer):
     child_memo_category_icon = serializers.CharField()
     memo_id = serializers.UUIDField()
     memo_title = serializers.CharField()
+    memo_priority = serializers.IntegerField()
     learning_efficiency_rate = serializers.FloatField()
     elapsed_date_count = serializers.IntegerField()
