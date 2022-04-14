@@ -359,5 +359,6 @@ class EachMemoLearningEfficiencyListView(generics.ListAPIView):
                     child_memo_category_name=F('child_memo_category__memo_category_name'),
                     child_memo_category_icon=F('child_memo_category__memo_category_icon'),
                     memo_title=F('memo__memo_title'),
+                    memo_priority=F('memo__memo_priority')
                     )
                 ) 
