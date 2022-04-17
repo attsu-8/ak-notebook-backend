@@ -239,6 +239,10 @@ class TodayLearningEfficiencyListView(generics.ListAPIView):
             DmLearningEfficiency.objects
                 .filter(
                     user_id=self.request.user.user_id,
+                    note__is_active=True,
+                    parent_memo_category__is_active=True,
+                    child_memo_category__is_active=True,
+                    memo__is_active=True,
                     aggregate_date__gte=aggregate_date_yesterday,
                     aggregate_date__lte=aggregate_date_today,
                     )
@@ -272,6 +276,10 @@ class ThreeMonthAverageLearningEfficiencyListView(generics.ListAPIView):
                     DmLearningEfficiency.objects
                         .filter(
                             user_id=self.request.user.user_id,
+                            note__is_active=True,
+                            parent_memo_category__is_active=True,
+                            child_memo_category__is_active=True,
+                            memo__is_active=True,
                             aggregate_date__gte=aggregate_date_three_month_ago_yesterday,
                             aggregate_date__lte=aggregate_date_yesterday,
                         )
@@ -293,6 +301,10 @@ class EachNoteLearningEfficiencyListView(generics.ListAPIView):
             DmLearningEfficiency.objects
                 .filter(
                     user_id=self.request.user.user_id,
+                    note__is_active=True,
+                    parent_memo_category__is_active=True,
+                    child_memo_category__is_active=True,
+                    memo__is_active=True,
                     aggregate_date=aggregate_date_today,
                     )
                 .values(
@@ -318,6 +330,10 @@ class EachParentMemoCategoryLearningEfficiencyListView(generics.ListAPIView):
             DmLearningEfficiency.objects
                 .filter(
                     user_id=self.request.user.user_id,
+                    note__is_active=True,
+                    parent_memo_category__is_active=True,
+                    child_memo_category__is_active=True,
+                    memo__is_active=True,
                     aggregate_date=aggregate_date_today,
                     )
                 .values(
@@ -344,6 +360,10 @@ class EachMemoLearningEfficiencyListView(generics.ListAPIView):
             DmLearningEfficiency.objects
                 .filter(
                     user_id=self.request.user.user_id,
+                    note__is_active=True,
+                    parent_memo_category__is_active=True,
+                    child_memo_category__is_active=True,
+                    memo__is_active=True,
                     aggregate_date=aggregate_date_today,
                     )
                 .extra(select={'elapsed_date_count': "DATEDIFF(CURRENT_TIMESTAMP,t_memos.created_at)"})
