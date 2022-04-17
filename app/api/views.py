@@ -228,8 +228,6 @@ class TodayLearningEfficiencyListView(generics.ListAPIView):
     queryset = DmLearningEfficiency.objects.all()
     serializer_class = serializers.TodayLearningEfficiencySerializer
     filter_backends = [OrderingFilter]
-    ordering_fields = ['aggregate_date']
-    ordering = ['aggregate_date']
 
     def get_queryset(self):
         aggregate_date_today = date.today()
@@ -246,8 +244,10 @@ class TodayLearningEfficiencyListView(generics.ListAPIView):
                     aggregate_date__gte=aggregate_date_yesterday,
                     aggregate_date__lte=aggregate_date_today,
                     )
+                .order_by('-aggregate_date')
                 .values('aggregate_date')
-                .annotate(average_learning_efficiency_rate=Round(Avg('learning_efficiency_rate'))))
+                .annotate(average_learning_efficiency_rate=Round(Avg('learning_efficiency_rate')))
+                )
 
 
 
