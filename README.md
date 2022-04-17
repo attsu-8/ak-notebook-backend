@@ -1,6 +1,23 @@
 # コンセプト
 インプット情報の記憶定着度を可視化し、継続的にインプットの定着を支援するメモアプリ。
 
+## <br>イメージ
+#### 分析用のHOME画面
+<img width="1728" alt="image" src="https://user-images.githubusercontent.com/71439984/163727668-438e887c-e36e-47c8-b6bc-fd21f9431954.png">
+
+#### <br>メモ用のHOME画面
+![image](https://user-images.githubusercontent.com/71439984/163728124-b9fcc2e7-8f1c-41f7-80d3-7b811126e6b6.png)
+
+
+## <br>デモアカウント
+
+- ak-notebookリンク
+    - [ak-notebook](https://ak-notebook.com) 
+- ID
+    - ak-notebook.demo@demo.com
+- PASSWORD
+    - password
+
 # <br>目的
 継続的にインプットの定着を支援し、知識のアウトプット（応用）まで繋げる目的とする。
 
