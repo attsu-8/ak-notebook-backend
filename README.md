@@ -1,6 +1,23 @@
 # コンセプト
 インプット情報の記憶定着度を可視化し、継続的にインプットの定着を支援するメモアプリ。
 
+## <br>イメージ
+#### 分析用のHOME画面
+<img width="1728" alt="image" src="https://user-images.githubusercontent.com/71439984/163727668-438e887c-e36e-47c8-b6bc-fd21f9431954.png">
+
+#### <br>メモ用のHOME画面
+![image](https://user-images.githubusercontent.com/71439984/163728124-b9fcc2e7-8f1c-41f7-80d3-7b811126e6b6.png)
+
+
+## <br>デモアカウント
+
+- ak-notebookリンク
+    - [ak-notebook](https://ak-notebook.com) 
+- ID
+    - ak-notebook.demo@demo.com
+- PASSWORD
+    - password
+
 # <br>目的
 継続的にインプットの定着を支援し、知識のアウトプット（応用）まで繋げる目的とする。
 
@@ -21,7 +38,6 @@
 # <br>使い方
 
 ## <br>①アカウント関係
----
 
 ### <br>アカウントを作成する
 1. [登録画面](https://ak-notebook.com/authentication/register) よりアカウントの登録を行う<br>
@@ -42,7 +58,6 @@
 2. ログアウトをクリックする
 
 ## <br>②メモの作成関係
----
 [メモページ](https://ak-notebook.com/memo) に遷移し各アイテムの作成を行う
 
 <br>以下の要素でメモを構成する。
@@ -83,7 +98,6 @@
     - 本文を入力する
 
 ## <br>③インプット情報の分析関係
----
 [HOMEページ](https://ak-notebook.com) に遷移し分析を行う
 
 ### <br>本日の全体学習効率を分析する
@@ -106,7 +120,6 @@
 # <br>利用技術
 
 ## <br>バックエンド
----
 ### 言語
 - python 3.9
 
@@ -125,7 +138,6 @@
 | boto3|1.21.38 |
 
 ## <br>フロントエンド
----
 ### 言語
 - typescript 4.5.4
 
@@ -149,12 +161,12 @@
 | yup | 0.32.11
 
 ## <br>インフラ
----
 ### AWS
 #### 構成図
+![AWS構成図](https://user-images.githubusercontent.com/71439984/163722001-1c5735e2-a168-4723-ba99-3ccb289cd22a.png)
 
 ### <br>データベース（MySQL 8.0）
 #### ER図
+![ER図](https://user-images.githubusercontent.com/71439984/163722438-4c2c1928-65f9-4e5a-a551-8b6595050f7a.png)
 
-## <br>その他
----
+
