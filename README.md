@@ -11,12 +11,8 @@
 
 ## <br>デモアカウント
 
-- ak-notebookリンク
-    - [ak-notebook](https://ak-notebook.com) 
-- ID
-    - ak-notebook.demo@demo.com
-- PASSWORD
-    - password
+[ak-notebook](https://ak-notebook.com) へアクセスし、「ゲストログイン」ボタンを押下してゲストログインが可能。
+
 
 # <br>目的
 継続的にインプットの定着を支援し、知識のアウトプット（応用）まで繋げる目的とする。
