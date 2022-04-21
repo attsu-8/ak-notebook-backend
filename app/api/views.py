@@ -3,11 +3,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from . import serializers
 from .models import Profile, Note, MemoCategory, Purpose, Memo, StickyNoteCategory, StickyNote, BrowsingMemoCount, DmBrowsingMemoCount, DmLearningEfficiency
 from django.db.models import Avg, Q, F, Func
 from django.contrib.auth import get_user_model
 from datetime import date, timedelta
+from utils.authentication.create_initial_user_data import create_initial_user_data
 
 class Round(Func):
     function = 'ROUND'
@@ -382,3 +385,10 @@ class EachMemoLearningEfficiencyListView(generics.ListAPIView):
                     memo_priority=F('memo__memo_priority')
                     )
                 ) 
+
+
+#ユーザー登録時に作成するチュートリアルデータを作成する
+@api_view(['GET'])
+def initialize_user_data(request):
+    create_initial_user_data(request.user)
+    return Response({"message": "Created Initial Data!"})
