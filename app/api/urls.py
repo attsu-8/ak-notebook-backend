@@ -32,5 +32,6 @@ urlpatterns = [
     path('dm/each-parent-memo-category-learning-efficiency-rate/', views.EachParentMemoCategoryLearningEfficiencyListView.as_view(), name='dm-each-note'),
     path('dm/each-memo-learning-efficiency-rate/', views.EachMemoLearningEfficiencyListView.as_view(), name='dm-each-note'),
     path('', include(router.urls)),
-    path('healthcheck/', lambda request: HttpResponse()) #ヘルスチェック用
+    path('healthcheck/', lambda request: HttpResponse()), #ヘルスチェック用
+    path('initial-data/', views.initialize_user_data ,name="initial-data"),
 ]
