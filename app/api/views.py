@@ -1,7 +1,6 @@
 from datetime import date, timedelta
 
-from django.contrib.auth import get_user_model
-from django.db.models import Avg, F, Func, Q
+from django.db.models import Avg, F, Func
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, viewsets
 from rest_framework.decorators import api_view
