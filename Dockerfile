@@ -46,6 +46,7 @@ RUN apt update && \
     apt -y install vim less && \
     apt -y install default-mysql-client && \
     apt clean && \
+    apt -y install make  && \
     rm -rf /var/lib/apt/lists/*
 
 COPY ./app ./
