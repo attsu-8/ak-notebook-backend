@@ -1,8 +1,8 @@
 lint:
-	python -m flake8
-	python -m isort --check --diff
-	python -m black --check
+	python -m flake8 ../src
+	python -m isort --check --diff ../src
+	python -m black --check ../src
 
 format:
-	python -m isort
-	python -m black
+	python -m isort ../src
+	python -m black ../src
