@@ -124,12 +124,6 @@ class MemoCategory(AkNotebookCommonModel):
         db_table = "m_memo_categories"
         verbose_name = "メモカテゴリ"
         verbose_name_plural = "メモカテゴリテーブル"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["parent_memo_category", "memo_category_name"],
-                name="ParentMemoCategory_MemoCategoryName_Unique",
-            )
-        ]
 
     def __str__(self):
         return str(self.memo_category_icon) + str(self.memo_category_name)
